@@ -178,7 +178,7 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
               </VStack>
               
               {/* CTA Buttons */}
-              <Stack direction={{ base: 'column', sm: 'row' }} spacing={4} pt={2} w={{ base: 'full', sm: 'auto' }}>
+              <Stack direction={{ base: 'column', md: 'row' }} spacing={4} pt={2} w={{ base: 'full', md: 'auto' }}>
                 <Button
                   size={{ base: 'lg', md: 'xl' }}
                   h={{ base: '50px', md: '60px' }}
@@ -192,7 +192,7 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
                     boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
                   }}
                   leftIcon={<Calendar size={20} />}
-                  w={{ base: 'full', sm: 'auto' }}
+                  w={{ base: 'full', md: 'auto' }}
                   transition="all 0.3s"
                   borderRadius="2xl"
                   boxShadow="0 10px 30px rgba(0,0,0,0.2)"
@@ -217,7 +217,7 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
                   leftIcon={<PhoneCall size={20} />}
                   as="a"
                   href={`tel:${businessInfo.phone}`}
-                  w={{ base: 'full', sm: 'auto' }}
+                  w={{ base: 'full', md: 'auto' }}
                   transition="all 0.3s"
                   borderRadius="2xl"
                   backdropFilter="blur(10px)"
@@ -853,7 +853,7 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
               </SimpleGrid>
             </VStack>
             
-            <Stack direction={{ base: 'column', sm: 'row' }} spacing={4} justify="center">
+            <Stack direction={{ base: 'column', md: 'row' }} spacing={4} justify="center" w="full">
               <Button
                 size={{ base: 'lg', md: 'xl' }}
                 h={{ base: '50px', md: '60px' }}
@@ -871,7 +871,7 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
                 transition="all 0.3s"
                 borderRadius="2xl"
                 boxShadow="0 10px 30px rgba(0,0,0,0.2)"
-                w={{ base: 'full', sm: 'auto' }}
+                w={{ base: 'full', md: 'auto' }}
               >
                 <Text display={{ base: 'none', sm: 'inline' }}>Programează Consultația Gratuită</Text>
                 <Text display={{ base: 'inline', sm: 'none' }}>Programează Consultația</Text>
@@ -896,7 +896,7 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
                 transition="all 0.3s"
                 borderRadius="2xl"
                 backdropFilter="blur(10px)"
-                w={{ base: 'full', sm: 'auto' }}
+                w={{ base: 'full', md: 'auto' }}
               >
                 <Text display={{ base: 'none', sm: 'inline' }}>Sună: </Text>
                 {businessInfo.phone}
