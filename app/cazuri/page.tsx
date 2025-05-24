@@ -22,10 +22,7 @@ export default function Projects() {
   }
   
   return (
-    <PageLayout
-      businessInfo={demoBusinessInfo}
-      onNavigate={handleNavigation}
-    >
+    <PageLayout>
       <ProjectsPage businessInfo={demoBusinessInfo} />
     </PageLayout>
   )

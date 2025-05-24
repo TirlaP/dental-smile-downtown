@@ -22,10 +22,7 @@ export default function About() {
   }
   
   return (
-    <PageLayout
-      businessInfo={demoBusinessInfo}
-      onNavigate={handleNavigation}
-    >
+    <PageLayout>
       <AboutPage businessInfo={demoBusinessInfo} />
     </PageLayout>
   )

@@ -22,10 +22,7 @@ export default function Contact() {
   }
   
   return (
-    <PageLayout
-      businessInfo={demoBusinessInfo}
-      onNavigate={handleNavigation}
-    >
+    <PageLayout>
       <ContactPage businessInfo={demoBusinessInfo} />
     </PageLayout>
   )
