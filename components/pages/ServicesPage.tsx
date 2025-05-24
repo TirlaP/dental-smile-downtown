@@ -17,6 +17,7 @@ export default function ServicesPage({ businessInfo, onNavigate }: ServicesPageP
   const textColor = useColorModeValue('gray.700', 'gray.300')
   const headingColor = useColorModeValue('gray.800', 'white')
   const cardBg = useColorModeValue('gray.50', 'gray.700')
+  const lightSuffix = useColorModeValue('.50', '.900')
   
   const services = [
     {
@@ -135,7 +136,7 @@ export default function ServicesPage({ businessInfo, onNavigate }: ServicesPageP
                   <VStack spacing={4}>
                     <Box
                       p={4}
-                      bg={useColorModeValue(`${service.color.split('.')[0]}.50`, `${service.color.split('.')[0]}.900`)}
+                      bg={`${service.color.split('.')[0]}${lightSuffix}`}
                       borderRadius="2xl"
                       color={service.color}
                     >
