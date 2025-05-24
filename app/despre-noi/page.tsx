@@ -2,7 +2,7 @@
 
 import { Box, useColorModeValue } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-import { demoBusinessInfo } from '../page'
+import { demoBusinessInfo } from '../../lib/business-info'
 import { useRouter } from 'next/navigation'
 
 const AboutPage = dynamic(() => import('../../components/pages/AboutPage'))

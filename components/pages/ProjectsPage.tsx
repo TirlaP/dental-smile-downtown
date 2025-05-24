@@ -16,6 +16,7 @@ export default function ProjectsPage({ businessInfo }: ProjectsPageProps) {
   const textColor = useColorModeValue('gray.700', 'gray.300')
   const headingColor = useColorModeValue('gray.800', 'white')
   const cardBg = useColorModeValue('gray.50', 'gray.700')
+  const lightSuffix = useColorModeValue('.50', '.900')
   
   const cases = [
     {
@@ -141,7 +142,7 @@ export default function ProjectsPage({ businessInfo }: ProjectsPageProps) {
                   h="full"
                 >
                   {/* Case Header */}
-                  <Box w="full" p={6} bg={useColorModeValue(`${case_item.color.split('.')[0]}.50`, `${case_item.color.split('.')[0]}.900`)}>
+                  <Box w="full" p={6} bg={`${case_item.color.split('.')[0]}${lightSuffix}`}>
                     <HStack justify="space-between" align="start">
                       <VStack align="start" spacing={3}>
                         <HStack spacing={3}>

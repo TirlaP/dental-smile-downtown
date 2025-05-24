@@ -31,7 +31,10 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
   const textColor = useColorModeValue('gray.700', 'gray.300')
   const headingColor = useColorModeValue('gray.800', 'white')
   const accentColor = useColorModeValue('blue.600', 'blue.400')
-  const cardBg = useColorModeValue('gray.50', 'gray.700')  
+  const cardBg = useColorModeValue('gray.50', 'gray.700')
+  const borderColor = useColorModeValue('gray.200', 'gray.600')
+  const serviceBgHover = useColorModeValue('blue.50', 'blue.900')
+  const testimonialBorderColor = useColorModeValue('gray.200', 'gray.600')  
   const services = [
     {
       icon: Heart,
@@ -462,7 +465,7 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
                     spacing={4}
                     h="full"
                     borderWidth={1}
-                    borderColor={useColorModeValue('gray.200', 'gray.600')}
+                    borderColor={borderColor}
                     position="relative"
                     overflow="hidden"
                     _hover={{
@@ -485,7 +488,7 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
                     
                     <Box
                       p={4}
-                      bg={useColorModeValue(`${service.color.split('.')[0]}.50`, `${service.color.split('.')[0]}.900`)}
+                      bg={serviceBgHover}
                       color={service.color}
                       borderRadius="full"
                     >
@@ -673,7 +676,7 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
                   p={8}
                   borderRadius="2xl"
                   borderWidth={1}
-                  borderColor={useColorModeValue('gray.200', 'gray.600')}
+                  borderColor={borderColor}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -685,7 +688,6 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
                   }}
                   position="relative"
                   overflow="hidden"
-                  transition="all 0.3s"
                 >
                   {/* Top gradient accent */}
                   <Box
@@ -713,7 +715,7 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
                     fontSize="sm"
                     fontWeight="bold"
                   >
-                    "
+                    &quot;
                   </Box>
                   
                   <VStack align="start" spacing={5} pt={4}>
@@ -740,7 +742,7 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
                     </Text>
                     
                     {/* Patient info */}
-                    <Box pt={2} borderTop="1px solid" borderColor={useColorModeValue('gray.200', 'gray.600')} w="full">
+                    <Box pt={2} borderTop="1px solid" borderColor={testimonialBorderColor} w="full">
                       <Text fontWeight="bold" color={headingColor} fontSize="md">
                         {testimonial.name}
                       </Text>
