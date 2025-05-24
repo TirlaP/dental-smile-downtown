@@ -180,18 +180,18 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
               {/* CTA Buttons */}
               <Stack direction={{ base: 'column', sm: 'row' }} spacing={4} pt={2} w={{ base: 'full', sm: 'auto' }}>
                 <Button
-                  size="xl"
-                  h="60px"
-                  px={8}
+                  size={{ base: 'lg', md: 'xl' }}
+                  h={{ base: '50px', md: '60px' }}
+                  px={{ base: 6, md: 8 }}
                   bg="white"
                   color="purple.700"
                   fontWeight="bold"
-                  fontSize="lg"
+                  fontSize={{ base: 'md', md: 'lg' }}
                   _hover={{ 
                     transform: 'translateY(-2px)',
                     boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
                   }}
-                  leftIcon={<Calendar />}
+                  leftIcon={<Calendar size={20} />}
                   w={{ base: 'full', sm: 'auto' }}
                   transition="all 0.3s"
                   borderRadius="2xl"
@@ -201,20 +201,20 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
                   Programează Consultația
                 </Button>
                 <Button
-                  size="xl"
-                  h="60px"
-                  px={8}
+                  size={{ base: 'lg', md: 'xl' }}
+                  h={{ base: '50px', md: '60px' }}
+                  px={{ base: 6, md: 8 }}
                   variant="outline"
                   borderColor="white"
                   borderWidth={2}
                   color="white"
                   fontWeight="bold"
-                  fontSize="lg"
+                  fontSize={{ base: 'md', md: 'lg' }}
                   _hover={{ 
                     bg: 'whiteAlpha.200',
                     transform: 'translateY(-2px)'
                   }}
-                  leftIcon={<PhoneCall />}
+                  leftIcon={<PhoneCall size={20} />}
                   as="a"
                   href={`tel:${businessInfo.phone}`}
                   w={{ base: 'full', sm: 'auto' }}
@@ -837,74 +837,78 @@ export default function HomePage({ businessInfo, onNavigate }: HomePageProps) {
               </Text>
               
               {/* Benefits */}
-              <HStack spacing={8} flexWrap="wrap" justify="center" pt={4}>
-                <HStack>
+              <SimpleGrid columns={{ base: 1, sm: 3 }} spacing={4} pt={4} w="full">
+                <HStack justify="center">
                   <Icon as={CheckCircle} boxSize={5} color="green.300" />
                   <Text fontWeight="medium">Consultație gratuită</Text>
                 </HStack>
-                <HStack>
+                <HStack justify="center">
                   <Icon as={Shield} boxSize={5} color="blue.300" />
                   <Text fontWeight="medium">Fără durere</Text>
                 </HStack>
-                <HStack>
+                <HStack justify="center">
                   <Icon as={Award} boxSize={5} color="yellow.300" />
                   <Text fontWeight="medium">Garanție pe viață</Text>
                 </HStack>
-              </HStack>
+              </SimpleGrid>
             </VStack>
             
             <Stack direction={{ base: 'column', sm: 'row' }} spacing={4} justify="center">
               <Button
-                size="xl"
-                h="60px"
-                px={10}
+                size={{ base: 'lg', md: 'xl' }}
+                h={{ base: '50px', md: '60px' }}
+                px={{ base: 6, md: 10 }}
                 bg="white"
                 color="purple.700"
                 fontWeight="bold"
-                fontSize="lg"
+                fontSize={{ base: 'md', md: 'lg' }}
                 _hover={{ 
                   transform: 'translateY(-2px)',
                   boxShadow: '0 20px 40px rgba(0,0,0,0.3)'
                 }}
-                leftIcon={<Calendar />}
+                leftIcon={<Calendar size={20} />}
                 onClick={() => onNavigate('contact')}
                 transition="all 0.3s"
                 borderRadius="2xl"
                 boxShadow="0 10px 30px rgba(0,0,0,0.2)"
+                w={{ base: 'full', sm: 'auto' }}
               >
-                Programează Consultația Gratuită
+                <Text display={{ base: 'none', sm: 'inline' }}>Programează Consultația Gratuită</Text>
+                <Text display={{ base: 'inline', sm: 'none' }}>Programează Consultația</Text>
               </Button>
               <Button
-                size="xl"
-                h="60px"
-                px={8}
+                size={{ base: 'lg', md: 'xl' }}
+                h={{ base: '50px', md: '60px' }}
+                px={{ base: 6, md: 8 }}
                 variant="outline"
                 borderColor="white"
                 borderWidth={2}
                 color="white"
                 fontWeight="bold"
-                fontSize="lg"
+                fontSize={{ base: 'md', md: 'lg' }}
                 _hover={{ 
                   bg: 'whiteAlpha.200',
                   transform: 'translateY(-2px)'
                 }}
-                leftIcon={<PhoneCall />}
+                leftIcon={<PhoneCall size={20} />}
                 as="a"
                 href={`tel:${businessInfo.phone}`}
                 transition="all 0.3s"
                 borderRadius="2xl"
                 backdropFilter="blur(10px)"
+                w={{ base: 'full', sm: 'auto' }}
               >
-                Sună: {businessInfo.phone}
+                <Text display={{ base: 'none', sm: 'inline' }}>Sună: </Text>
+                {businessInfo.phone}
               </Button>
             </Stack>
             
             {/* Trust signals */}
-            <HStack spacing={6} pt={4} opacity={0.9} flexWrap="wrap" justify="center">
-              <Text fontSize="sm">✓ Peste 3000 de pacienți fericiți</Text>
-              <Text fontSize="sm">✓ 12+ ani de experiență</Text>
-              <Text fontSize="sm">✓ Echipamente de ultimă generație</Text>
-            </HStack>
+            <SimpleGrid columns={{ base: 1, sm: 3 }} spacing={4} pt={4} opacity={0.9} w="full">
+              <Text fontSize="sm" textAlign="center">✓ Peste 3000 de pacienți fericiți</Text>
+              <Text fontSize="sm" textAlign="center">✓ 12+ ani de experiență</Text>
+              <Text fontSize="sm" textAlign="center">✓ Echipamente de ultimă generație</Text>
+            </SimpleGrid>
           </MotionVStack>
         </Container>
       </Box>

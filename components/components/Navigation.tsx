@@ -137,8 +137,10 @@ export default function Navigation({ currentPage, onNavigate, businessInfo }: Na
             boxShadow: shouldUseLightColors ? '0 4px 20px rgba(255,255,255,0.2)' : 'md'
           }}
           transition="all 0.3s"
+          display={{ base: 'flex', md: 'flex' }}
         >
-          Programare: {businessInfo.phone}
+          <Text display={{ base: 'none', lg: 'inline' }}>Programare: </Text>
+          {businessInfo.phone}
         </Button>
       </Show>
     </Flex>

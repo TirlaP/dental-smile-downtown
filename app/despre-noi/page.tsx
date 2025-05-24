@@ -1,17 +1,14 @@
 'use client'
 
-import { Box, useColorModeValue } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { demoBusinessInfo } from '../../lib/business-info'
 import { useRouter } from 'next/navigation'
 
 const AboutPage = dynamic(() => import('../../components/pages/AboutPage'))
-const ClientScrollingNavbar = dynamic(() => import('../../components/components/ClientScrollingNavbar'))
-const Footer = dynamic(() => import('../../components/components/Footer'))
+const PageLayout = dynamic(() => import('../../components/components/PageLayout'))
 
 export default function About() {
   const router = useRouter()
-  const bgColor = useColorModeValue('gray.50', 'gray.900')
   
   const handleNavigation = (page: string) => {
     const routeMap: { [key: string]: string } = {
@@ -25,13 +22,11 @@ export default function About() {
   }
   
   return (
-    <Box bg={bgColor} minH="100vh">
-      <ClientScrollingNavbar 
-        onNavigate={handleNavigation}
-        businessInfo={demoBusinessInfo}
-      />
+    <PageLayout
+      businessInfo={demoBusinessInfo}
+      onNavigate={handleNavigation}
+    >
       <AboutPage businessInfo={demoBusinessInfo} />
-      <Footer businessInfo={demoBusinessInfo} onNavigate={handleNavigation} />
-    </Box>
+    </PageLayout>
   )
 }
