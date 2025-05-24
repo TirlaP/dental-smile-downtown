@@ -3,6 +3,7 @@
 import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Hide, IconButton, useColorModeValue, useDisclosure, VStack } from '@chakra-ui/react'
 import { Menu } from 'lucide-react'
 import { useRouter, usePathname } from 'next/navigation'
+import { useState, useEffect } from 'react'
 import { demoBusinessInfo } from '../../lib/business-info'
 import ClientScrollingNavbar from './ClientScrollingNavbar'
 import Footer from './Footer'
@@ -16,6 +17,17 @@ export default function PageLayout({ children }: PageLayoutProps) {
   const bgColor = useColorModeValue('gray.50', 'gray.900')
   const router = useRouter()
   const pathname = usePathname()
+  const [isScrolled, setIsScrolled] = useState(false)
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY
+      setIsScrolled(scrollTop > 50)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
   
   const handleNavigation = (page: string) => {
     const routeMap: { [key: string]: string } = {
@@ -52,8 +64,8 @@ export default function PageLayout({ children }: PageLayoutProps) {
             icon={<Menu />}
             onClick={onOpen}
             variant="ghost"
-            color={currentPage === 'home' ? 'white' : 'gray.600'}
-            _hover={{ bg: currentPage === 'home' ? 'whiteAlpha.200' : 'gray.100' }}
+            color={currentPage === 'home' && !isScrolled ? 'white' : 'gray.600'}
+            _hover={{ bg: currentPage === 'home' && !isScrolled ? 'whiteAlpha.200' : 'gray.100' }}
           />
         </Hide>
       </ClientScrollingNavbar>
