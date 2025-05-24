@@ -1,79 +1,122 @@
-# Smile Downtown Website Adaptation
+# CLAUDE.md
 
-## Project Overview
-Adapting the dental-template-02 for **Clinica Stomatologică Smile Downtown**, a modern dental clinic in central Alba Iulia, Romania.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Business Information
+## Essential Commands
+
+### Development
+```bash
+npm run dev          # Start development server (localhost:3000)
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint checks
+```
+
+### Testing and Quality
+- Always run `npm run build` after making changes to ensure no TypeScript or build errors
+- Run `npm run lint` to check for code quality issues
+- The project uses Next.js 15 with TypeScript and React 18
+
+## Architecture Overview
+
+### Routing System
+This is a **Next.js App Router** project with Romanian URLs:
+- `/` → Home (Acasă)
+- `/servicii` → Services (Servicii) 
+- `/despre-noi` → About (Despre Noi)
+- `/cazuri` → Projects/Cases (Cazuri)
+- `/contact` → Contact
+
+### Key Architecture Patterns
+
+#### Business Information Management
+- All business data centralized in `lib/business-info.ts`
+- Never export business info from page components (causes Next.js build errors)
+- Import business info: `import { demoBusinessInfo } from '../../lib/business-info'`
+
+#### Layout Strategy
+- `PageLayout` component (`components/components/PageLayout.tsx`) provides shared functionality:
+  - Navigation with burger menu
+  - Footer
+  - Mobile drawer menu
+  - Scroll detection for navbar styling
+- Use PageLayout for all route pages except home page
+- Home page uses custom layout due to hero section requirements
+
+#### Component Structure
+```
+components/
+├── components/          # Shared UI components
+│   ├── PageLayout.tsx   # Main layout wrapper
+│   ├── Navigation.tsx   # Desktop navigation
+│   ├── ScrollingNavbar.tsx    # Navbar behavior
+│   ├── ClientScrollingNavbar.tsx  # Client-side navbar
+│   └── Footer.tsx
+└── pages/              # Page-specific components
+    ├── HomePage.tsx
+    ├── ServicesPage.tsx
+    ├── AboutPage.tsx
+    ├── ProjectsPage.tsx
+    └── ContactPage.tsx
+```
+
+### Styling System
+- **Chakra UI** with TypeScript
+- Responsive design using Chakra's breakpoint system: `base` (mobile), `md` (tablet), `lg` (desktop)
+- Color mode support (light/dark themes)
+
+#### React Hooks Rules
+**CRITICAL**: Always call `useColorModeValue` at the top level of components, never inside callbacks or map functions:
+
+```typescript
+// ✅ Correct
+const bgColor = useColorModeValue('white', 'gray.800')
+const items = data.map(item => <Box bg={bgColor}>...</Box>)
+
+// ❌ Wrong - causes build errors
+const items = data.map(item => <Box bg={useColorModeValue('white', 'gray.800')}>...</Box>)
+```
+
+### Responsive Design Patterns
+- Buttons stack vertically on mobile/tablet, horizontal on desktop: `direction={{ base: 'column', md: 'row' }}`
+- Use `SimpleGrid` for responsive grids: `columns={{ base: 1, sm: 3 }}`
+- Button sizing: `size={{ base: 'lg', md: 'xl' }}`, `h={{ base: '50px', md: '60px' }}`
+- Navigation CTA shows only icon + phone number on mobile
+
+### Navigation Behavior
+- **Home page**: Transparent navbar at top, white when scrolled
+- **Other pages**: Always white navbar background
+- **Burger menu**: White on home (not scrolled), dark gray elsewhere
+- All navigation handled through route mapping to Romanian URLs
+
+## Business Context
 
 ### Clinica Stomatologică Smile Downtown
-- **Name**: Clinica Stomatologică Smile Downtown
-- **Tagline**: "Clinică stomatologică modernă, situată în centrul municipiului Alba Iulia"
-- **Location**: Strada Trandafirilor numarul 13, Alba Iulia, Romania
-- **Phone**: 0753 083 800
-- **Email**: smilemetadent@gmail.com
-- **Rating**: 100% recommend (9 Reviews)
-- **Focus**: Modern dental clinic in Alba Iulia city center
+- Modern dental clinic in Alba Iulia, Romania
+- Young professional team (Dr. Andrei Dîrzu, Dr. Amalia Slevaș)
+- Focus: Preventive, minimally invasive, pain-free dentistry
+- Location: Strada Trandafirilor numărul 13, Alba Iulia
+- Phone: 0753 083 800
 
-### Key Personnel
-- **Dr. Andrei Dîrzu** - Graduate of "Iuliu Hațieganu" University Cluj-Napoca, currently resident in Oral and Maxillofacial Surgery
-- **Dr. Amalia Slevaș** - Resident in Orthodontics and Dentofacial Orthopedics at "George Emil Palade" University Târgu Mureș
+### Content Strategy
+- All content in Romanian
+- Emphasize: young team, pain-free treatments, central location
+- Use real patient testimonials from Facebook reviews
+- SEO optimized for Alba Iulia local searches
 
-### Philosophy
-- Preventive and minimally invasive dentistry
-- Patient comfort and quality of life improvement
-- "E timpul să zâmbești din nou!" (It's time to smile again!)
+## Common Issues and Solutions
 
-### Review Themes from Facebook
-1. **Young Professional Team**: "Medicii sunt tineri profesioniști cu o energie foarte plăcută"
-2. **Attention to Detail**: "incredibil de răbdatori și atenți la detalii"
-3. **Painless Treatments**: "Tratamente fara dureri! Cei mai buni de pe piata!"
-4. **Patient Care**: "foarte atenți la nevoile tale și te fac să te simți în siguranță"
-5. **Professional Excellence**: "profesionalism desăvârșit, lucrând cu multă pasiune și dăruire"
+### Build Errors
+- **"Page export field" error**: Never export business info from page components
+- **React Hooks errors**: Move all hooks to component top level
+- **TypeScript errors**: Ensure proper prop typing for Chakra UI components
 
+### Mobile Responsiveness
+- Always test button stacking on mobile
+- Ensure burger menu visibility (color contrast)
+- Verify full-width buttons on mobile: `w={{ base: 'full', md: 'auto' }}`
 
-## Unique Selling Points
-1. **Central Location**: Located in the heart of Alba Iulia
-2. **Young Professional Team**: Fresh, energetic approach to dentistry
-3. **Minimally Invasive**: Focus on gentle, conservative treatments
-4. **Perfect Review Record**: 100% recommendation rate from patients
-5. **University-Trained Specialists**: Both doctors have excellent academic backgrounds
-
-## Services to Highlight
-1. **Preventive Dentistry** - Focus on prevention and early intervention
-2. **Minimally Invasive Treatments** - Conservative approach to dental care
-3. **Oral and Maxillofacial Surgery** - Dr. Dîrzu's specialty
-4. **Orthodontics** - Dr. Slevaș's specialty
-5. **General Dentistry** - Comprehensive dental care
-6. **Pain-Free Treatments** - Emphasized in reviews
-
-## Testimonials from Real Reviews
-- **Rareș Matasariu**: "Foarte profesioniști!! Recomand!"
-- **Diacu Dana**: "Profesionalism, răbdare și înțelegere a nevoilor fiecărui pacient!"
-- **Miruna Slevaș**: "Medicii sunt foarte atenți la nevoile tale și te fac să te simți în siguranță. Fără durere."
-- **Delia Danciu**: "Medicii sunt tineri profesioniști cu o energie foarte plăcută. Atmosfera prietenoasă."
-- **Emanuel Slevaș**: "Tratamente fara dureri! Cei mai buni de pe piata!"
-
-## Implementation Plan
-1. **Phase 1**: Update business information and contact details
-2. **Phase 2**: Customize team section with Dr. Dîrzu and Dr. Slevaș
-3. **Phase 3**: Update services to reflect preventive/minimally invasive focus
-4. **Phase 4**: Add real testimonials from Facebook reviews
-5. **Phase 5**: Optimize for Alba Iulia local search
-
-## Key Files to Modify
-1. **app/page.tsx** - Update business info
-2. **components/pages/HomePage.tsx** - Customize hero and content
-3. **components/pages/AboutPage.tsx** - Add team information
-4. **components/pages/ServicesPage.tsx** - Update services
-5. **components/pages/ContactPage.tsx** - Update contact details
-6. **public/team-photo.jpg** - Already available
-7. **public/logo.jpg** - Replace with Smile Downtown logo
-
-## Target Audience
-- Residents of Alba Iulia city center
-- Patients seeking gentle, minimally invasive treatments
-- People looking for young, energetic dental professionals
-- Patients wanting preventive dental care
-- Those seeking specialist orthodontic and surgical treatments
-
-This adaptation will showcase Smile Downtown's unique approach to modern, gentle dentistry in the heart of Alba Iulia.
+### Performance
+- Use `dynamic` imports for heavy components
+- Optimize images in `/public` directory
+- Framer Motion animations should be performant with `whileInView`
